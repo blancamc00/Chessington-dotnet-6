@@ -25,6 +25,28 @@ namespace Chessington.GameEngine.Pieces
                     }
                 }
 
+                var moveToEat = Square.At(pos.Row - 1, pos.Col - 1);
+                if (moveToEat.Col < GameSettings.BoardSize-1 && moveToEat.Row < GameSettings.BoardSize-1 && moveToEat.Col >= 0 &&
+                    moveToEat.Row >= 0)
+                {
+                    Piece pieceThere = board.GetPiece(moveToEat);
+                    if (pieceThere != null && pieceThere.Player != this.Player)
+                    {
+                        yield return moveToEat;
+                    }
+                }
+
+                moveToEat = Square.At(pos.Row - 1, pos.Col + 1);
+                if (moveToEat.Col < GameSettings.BoardSize-1 && moveToEat.Row < GameSettings.BoardSize-1 && moveToEat.Col >= 0 &&
+                    moveToEat.Row >= 0)
+                {
+                    Piece pieceThere = board.GetPiece(moveToEat);
+                    if (pieceThere != null && pieceThere.Player != this.Player)
+                    {
+                        yield return moveToEat;
+                    }
+                }
+
             }
             else
             {
@@ -39,6 +61,28 @@ namespace Chessington.GameEngine.Pieces
                     }
                 }
                 
+                var moveToEat = Square.At(pos.Row + 1, pos.Col + 1);
+                if (moveToEat.Col < GameSettings.BoardSize - 1 && moveToEat.Row < GameSettings.BoardSize - 1 &&
+                    moveToEat.Col >= 0 && moveToEat.Row >= 0)
+                {
+                    Piece pieceThere = board.GetPiece(moveToEat);
+                    if (pieceThere != null && pieceThere.Player != this.Player)
+                    {
+                        yield return moveToEat;
+                    }
+                }
+
+                moveToEat = Square.At(pos.Row + 1, pos.Col - 1);
+                if (moveToEat.Col < GameSettings.BoardSize - 1 && moveToEat.Row < GameSettings.BoardSize - 1 &&
+                    moveToEat.Col >= 0 && moveToEat.Row >= 0)
+                {
+                    Piece pieceThere = board.GetPiece(moveToEat);
+                    if (pieceThere != null && pieceThere.Player != this.Player)
+                    {
+                        yield return moveToEat;
+                    }
+                }
+
             }
         }
     }

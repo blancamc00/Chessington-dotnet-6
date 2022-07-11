@@ -15,56 +15,56 @@ namespace Chessington.GameEngine.Pieces
             var move = new Square();
             
             move = Square.At(pos.Col - 1, pos.Row + 1);
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
-                move.Row >= 0)
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
+                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
             }
             
             move = (Square.At(pos.Col - 1, pos.Row));
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
             }
             
             move = (Square.At(pos.Col - 1, pos.Row - 1));
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
             }
             
             move = (Square.At(pos.Col, pos.Row + 1));
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
             }
             
             move = (Square.At(pos.Col, pos.Row - 1));
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
             }
             
             move = (Square.At(pos.Col + 1, pos.Row + 1));
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
             }
             
             move = (Square.At(pos.Col + 1, pos.Row));
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
             }
             
             move = (Square.At(pos.Col + 1, pos.Row - 1));
-            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+            if (move.Col < GameSettings.BoardSize -1 && move.Row < GameSettings.BoardSize -1 && move.Col >= 0 &&
                 move.Row >= 0)
             {
                 if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
