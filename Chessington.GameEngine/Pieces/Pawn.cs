@@ -14,14 +14,20 @@ namespace Chessington.GameEngine.Pieces
             if (this.Player == Player.White)
             {
                 Square move = new Square(pos.Row - 1, pos.Col);
-                IEnumerable<Square> moves = new Square[]{move};
-                return moves;
+                yield return move;
+                if (pos.Row == 7)
+                {
+                    yield return new Square(pos.Row - 2, pos.Col);
+                }
             }
             else
             {
                 Square move = new Square(pos.Row + 1, pos.Col);
-                IEnumerable<Square> moves = new Square[]{move};
-                return moves;
+                yield return move;
+                if (pos.Row == 1)
+                {
+                    yield return new Square(pos.Row + 2, pos.Col);
+                }
             }
         }
     }
