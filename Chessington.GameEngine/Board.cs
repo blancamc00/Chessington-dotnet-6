@@ -65,9 +65,66 @@ namespace Chessington.GameEngine
                 OnPieceCaptured(_board[to.Row, to.Col]);
             }
 
-            //Move the piece and set the 'from' square to be empty.
-            _board[to.Row, to.Col] = _board[from.Row, from.Col];
+            if(movingPiece.GetType().BaseType.Name == "Pawn")
+            {
+                ((Pawn)movingPiece).firstMove = Square.At(from.Row, from.Col);
+                //Move the piece and set the 'from' square to be empty.
+
+            }
+
+            movingPiece.numOfMoves += 1;
+            
+            _board[to.Row, to.Col] = movingPiece;
             _board[from.Row, from.Col] = null;
+
+            if (_board[to.Row + 1, to.Col] != null && _board[to.Row + 1, to.Col].GetType().BaseType.Name == "Pawn")
+            {
+                if (((Pawn)movingPiece).firstMove.Row - to.Row == -1)
+                {
+                    _board[to.Row + 1, to.Col] = null;
+                }
+            }
+            
+            if (_board[to.Row - 1, to.Col] != null && _board[to.Row - 1, to.Col].GetType().BaseType.Name == "Pawn")
+            {
+                if (((Pawn)movingPiece).firstMove.Row - to.Row == 1)
+                {
+                    _board[to.Row - 1, to.Col] = null;
+                }
+            }
+            
+            //Castling
+            if (movingPiece.GetType().BaseType.Name == "King" && Math.Abs(from.Col - to.Col) == 2)
+            {
+                if ((to.Col - from.Col) / 2 > 0)
+                {
+                    _board[to.Row, to.Col - (to.Col-from.Col)/2] = _board[from.Row, 7];
+                    _board[from.Row, 7] = null;
+                }
+                else
+                {
+                    _board[to.Row, to.Col - (to.Col-from.Col)/2] = _board[from.Row, 0];
+                    _board[from.Row, 0] = null;
+                }
+            }
+
+            if (movingPiece.GetType().BaseType.Name == "Pawn" && (to.Row == 0 || to.Row == 7))
+            {
+                _board[to.Row, to.Col] = new Queen(movingPiece.Player);
+            }
+
+
+            //Indicate if a pawn has moved two squares in the last move.
+            /*
+            var pieceThatMoved = _board[to.Row, to.Col];
+            if (pieceThatMoved.GetType().BaseType.Name == "Pawn")
+            {
+                if (to.Row - from.Row == 2 || to.Row - from.Row == -2)
+                {
+                    _board[to.Row, to.Col].firstMove
+                }
+            }
+            */
 
             CurrentPlayer = movingPiece.Player == Player.White ? Player.Black : Player.White;
             OnCurrentPlayerChanged(CurrentPlayer);
