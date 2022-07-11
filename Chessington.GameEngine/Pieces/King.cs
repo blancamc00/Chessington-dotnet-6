@@ -12,14 +12,63 @@ namespace Chessington.GameEngine.Pieces
         {
             Square pos = board.FindPiece(this);
             var moves = new List<Square>();
-            moves.Add(Square.At(pos.Col - 1, pos.Row + 1));
-            moves.Add(Square.At(pos.Col - 1, pos.Row));
-            moves.Add(Square.At(pos.Col - 1, pos.Row - 1));
-            moves.Add(Square.At(pos.Col, pos.Row + 1));
-            moves.Add(Square.At(pos.Col, pos.Row - 1));
-            moves.Add(Square.At(pos.Col + 1, pos.Row + 1));
-            moves.Add(Square.At(pos.Col + 1, pos.Row));
-            moves.Add(Square.At(pos.Col + 1, pos.Row - 1));
+            var move = new Square();
+            
+            move = Square.At(pos.Col - 1, pos.Row + 1);
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
+            
+            move = (Square.At(pos.Col - 1, pos.Row));
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
+            
+            move = (Square.At(pos.Col - 1, pos.Row - 1));
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
+            
+            move = (Square.At(pos.Col, pos.Row + 1));
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
+            
+            move = (Square.At(pos.Col, pos.Row - 1));
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
+            
+            move = (Square.At(pos.Col + 1, pos.Row + 1));
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
+            
+            move = (Square.At(pos.Col + 1, pos.Row));
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
+            
+            move = (Square.At(pos.Col + 1, pos.Row - 1));
+            if (move.Col < GameSettings.BoardSize && move.Row < GameSettings.BoardSize && move.Col >= 0 &&
+                move.Row >= 0)
+            {
+                if (board.checkIfEmpty(move) || board.GetPiece(move).Player != this.Player) moves.Add(move);
+            }
             
             moves.RemoveAll(s => s.Col >= GameSettings.BoardSize || s.Row >= GameSettings.BoardSize
                                                                  || s.Col < 0 || s.Row < 0);
