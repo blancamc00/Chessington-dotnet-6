@@ -40,6 +40,15 @@ namespace Chessington.GameEngine
             throw new ArgumentException("The supplied piece is not on the board.", "piece");
         }
 
+        public bool checkIfEmpty(Square pos)
+        {
+            if (_board[pos.Row, pos.Col] != null)
+            {
+                return false;
+            }
+            else{ return true;}
+        }
+
         public void MovePiece(Square from, Square to)
         {
             var movingPiece = _board[from.Row, from.Col];
