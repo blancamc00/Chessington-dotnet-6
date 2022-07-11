@@ -129,6 +129,18 @@ namespace Chessington.GameEngine
             CurrentPlayer = movingPiece.Player == Player.White ? Player.Black : Player.White;
             OnCurrentPlayerChanged(CurrentPlayer);
         }
+
+        public bool CheckIfYourChecking(Board board, Player player)
+        {
+            List<Square> possibleMoves = new List<Square>();
+            for (int i = 0; i < GameSettings.BoardSize; i++)
+            {
+                for (int j = 0; j < GameSettings.BoardSize; j++)
+                {
+                    if(board[i,j].player == player)
+                }
+            }
+        }
         
         public delegate void PieceCapturedEventHandler(Piece piece);
         
