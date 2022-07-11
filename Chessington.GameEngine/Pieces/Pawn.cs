@@ -15,13 +15,13 @@ namespace Chessington.GameEngine.Pieces
             if (this.Player == Player.White)
             {
                 Square move = new Square(pos.Row - 1, pos.Col);
-                if (board.checkIfEmpty(move))
+                if (move.Row >= 0 && board.checkIfEmpty(move) && move.Row >= 0)
                 {
                     yield return move;
                     if (pos.Row == 7)
                     {
                         move = Square.At(pos.Row - 2, pos.Col);
-                        if (board.checkIfEmpty(move)) yield return move;
+                        if (move.Row >= 0 && board.checkIfEmpty(move)) yield return move;
                     }
                 }
 
@@ -29,13 +29,13 @@ namespace Chessington.GameEngine.Pieces
             else
             {
                 Square move = new Square(pos.Row + 1, pos.Col);
-                if (board.checkIfEmpty(move))
+                if (move.Row <8 && board.checkIfEmpty(move))
                 {
                     yield return move;
                     if (pos.Row == 1)
                     {
                         move = Square.At(pos.Row + 2, pos.Col);
-                        if (board.checkIfEmpty(move)) yield return move;
+                        if (move.Row < 8 && board.checkIfEmpty(move)) yield return move;
                     }
                 }
                 
