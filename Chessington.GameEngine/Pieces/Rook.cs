@@ -13,15 +13,35 @@ namespace Chessington.GameEngine.Pieces
             Square pos = board.FindPiece(this);
             
             var moves = new List<Square>();
+            var move = new Square();
 
             for (var i = 0; i < 8; i++)
-                moves.Add(Square.At(pos.Row, i));
+            {
+                move = Square.At(pos.Row, i);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
+            }
+
 
             for (var i = 0; i < 8; i++)
-                moves.Add(Square.At(i, pos.Col));
+            {
+                move = Square.At(i, pos.Col);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
+            }
 
             //Get rid of our starting location.
-            moves.RemoveAll(s => s == pos);
+            //moves.RemoveAll(s => s == pos);
             return moves;
         }
     }
