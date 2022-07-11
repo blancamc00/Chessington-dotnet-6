@@ -12,42 +12,86 @@ namespace Chessington.GameEngine.Pieces
         {
             var moves = new List<Square>();
             Square pos = board.FindPiece(this);
-            Square latestMove = pos;
+            Square move = pos;
 
-            while (latestMove.Col < GameSettings.BoardSize-1 && latestMove.Row < GameSettings.BoardSize-1)
+            while (move.Col < GameSettings.BoardSize-1 && move.Row < GameSettings.BoardSize-1)
             {
-                latestMove = Square.At(latestMove.Row + 1, latestMove.Col + 1);
-                moves.Add(latestMove);
+                move = Square.At(move.Row + 1, move.Col + 1);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
             }
             
-            latestMove = pos;
+            move = pos;
             
-            while (latestMove.Col < GameSettings.BoardSize-1 && latestMove.Row > 0)
+            while (move.Col < GameSettings.BoardSize-1 && move.Row > 0)
             {
-                latestMove = Square.At(latestMove.Row-1, latestMove.Col+1);
-                moves.Add(latestMove);
+                move = Square.At(move.Row-1, move.Col+1);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
             }
             
-            latestMove = pos;
+            move = pos;
             
-            while (latestMove.Col > 0 && latestMove.Row > 0)
+            while (move.Col > 0 && move.Row > 0)
             {
-                latestMove = Square.At(latestMove.Row-1, latestMove.Col-1);
-                moves.Add(latestMove);
+                move = Square.At(move.Row-1, move.Col-1);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
             }
-            latestMove = pos;
+            move = pos;
             
-            while (latestMove.Col > 0 && latestMove.Row < GameSettings.BoardSize-1 )
+            while (move.Col > 0 && move.Row < GameSettings.BoardSize-1 )
             {
-                latestMove = Square.At(latestMove.Row+1, latestMove.Col-1);
-                moves.Add(latestMove);
+                move = Square.At(move.Row+1, move.Col-1);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
             }
-            
-            for (var i = 0; i < GameSettings.BoardSize; i++)
-                moves.Add(Square.At(pos.Row, i));
 
             for (var i = 0; i < GameSettings.BoardSize; i++)
-                moves.Add(Square.At(i, pos.Col));
+            {
+                move = Square.At(pos.Row, i);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
+            }
+
+            for (var i = 0; i < GameSettings.BoardSize; i++)
+            {
+                move = Square.At(i, pos.Col);
+                if (board.checkIfEmpty(move)) moves.Add(move);
+                else if (board.GetPiece(move).Player == this.Player && move != pos) break;
+                else if (board.GetPiece(move).Player != this.Player && move != pos)
+                {
+                    moves.Add(move);
+                    break;
+                }
+
+            }
+
 
             //Get rid of our starting location.
             moves.RemoveAll(s => s == pos);
